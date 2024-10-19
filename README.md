@@ -1,3 +1,4 @@
+  [![HitCount](https://hits.dwyl.com/Maxolotus/Celebforum-Downloader.svg?style=flat-square)](http://hits.dwyl.com/Maxolotus/Celebforum-Downloader)
 ## Celebforum Downloader
 This is for the Celebforum and Celebforum only!
 # Config 
