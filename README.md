@@ -8,7 +8,7 @@ It looks like that
 ```json
 {
     "xf_csrf":	"blabla",
-    "xf_session":	"blabla",
+    "xf_session": "blabla",
     "xf_user":"blabla"
 }
 
