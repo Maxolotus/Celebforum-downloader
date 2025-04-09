@@ -3,6 +3,7 @@ import downloader
 import requests
 import json
 import os
+from time import sleep
 
 if not os.path.exists("config.json"):
     with open("config.json", "w") as f:
@@ -42,6 +43,7 @@ def getUser(name, threads=2, pics=True, bunk=True, saint=True, waittime=4):
         downloader.download_files(bunkr, folder, threads, waittime=waittime)
         print(f"DOWNLOADING SAINTS-VIDEOS OF PAGE-{i} WITH {len(saints)} VIDEOS!")
         downloader.download_files(saints, folder, threads, headers=getSaintHeaders(), waittime=waittime)
+        sleep(20)
 
 
 def getRaw(searcher, xpath, attribute):
