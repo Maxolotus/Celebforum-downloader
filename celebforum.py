@@ -20,8 +20,10 @@ if not os.path.exists("config.json"):
 else:
     data = json.load(open("config.json", "r"))
 
+
+
 # user must contain the whole name: Example: feedeline.7495
-def getUser(name, threads=2, pics=True, bunk=True, saint=True):
+def getUser(name, threads=2, pics=True, bunk=True, saint=True, waittime=4):
     url = f"https://celebforum.to/threads/{name}"
     req = requests.get(url, cookies=data)
     folder = name.split('.')[0]
@@ -35,11 +37,11 @@ def getUser(name, threads=2, pics=True, bunk=True, saint=True):
         bunkr = getBunkr(searcher) if bunk else []
         saints = getSaint(searcher) if saint else []
         print(f"DOWNLOADING PICTURES OF PAGE-{i} WITH {len(pictures)} PICTURES!")
-        downloader.download_files(pictures, folder, threads, cookies=data, celeb=True)
+        downloader.download_files(pictures, folder, threads, cookies=data, celeb=True, waittime=waittime)
         print(f"DOWNLOADING BUNKR-VIDEOS OF PAGE-{i} WITH {len(bunkr)} VIDEOS!")
-        downloader.download_files(bunkr, folder, threads)
+        downloader.download_files(bunkr, folder, threads, waittime=waittime)
         print(f"DOWNLOADING SAINTS-VIDEOS OF PAGE-{i} WITH {len(saints)} VIDEOS!")
-        downloader.download_files(saints, folder, threads, headers=getSaintHeaders())
+        downloader.download_files(saints, folder, threads, headers=getSaintHeaders(), waittime=waittime)
 
 
 def getRaw(searcher, xpath, attribute):
@@ -78,6 +80,21 @@ def getBunkr(searcher):
         for video in tmp:
             bunkr.append(video.get('src'))           
     return bunkr            
+
+def getBasicHeaders():
+    return {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/123.0.0.0 Safari/537.36",
+    "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    "Accept-Language": "de-DE,de;q=0.9,en;q=0.8",
+    "DNT": "1",  # Do Not Track
+    "Connection": "keep-alive",
+    "Sec-Fetch-Dest": "image",
+    "Sec-Fetch-Mode": "no-cors",
+    "Sec-Fetch-Site": "cross-site",
+    }
+
 
 def getSaintHeaders():
     return {
